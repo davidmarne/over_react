@@ -422,6 +422,16 @@ abstract class PropsMapViewMixin {
 
   @override
   String toString() => '$runtimeType: ${prettyPrintMap(_map)}';
+
+  @override
+  int get hashCode => props.hashCode;
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! PropsMapViewMixin) return false;
+    return props.keys.every((dynamic key) => props[key] == other.props[key]);
+  }
 }
 
 /// Works in conjunction with [MapViewMixin] to provide [dart.collection.MapView]-like

@@ -410,6 +410,34 @@ main() {
           expect(props, equals({}));
         });
       });
+      
+      group('equality operator', () {
+        test('returns false when comparing other type', () {
+          var props = new TestComponentProps();
+          expect(props == 1, false);
+        });
+
+        test('returns true against itself', () {
+          var props = new TestComponentProps();
+          expect(props == props, true);
+        });
+
+        test('returns true against a different instance with similar values', () {
+          var propsA = new TestComponentProps();
+          var propsB = new TestComponentProps();
+          propsA.props['foo'] = 1;
+          propsB.props['foo'] = 1;
+          expect(propsA == propsB, true);
+        });
+
+        test('returns false against a different instance with different values', () {
+          var propsA = new TestComponentProps();
+          var propsB = new TestComponentProps();
+          propsA.props['foo'] = 1;
+          propsB.props['foo'] = 2;
+          expect(propsA == propsB, false);
+        });
+      });
     });
 
     group('UiState', () {
